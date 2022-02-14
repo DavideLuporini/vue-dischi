@@ -1,7 +1,7 @@
 <template>
     <div class="container">
       <div class="row g-3 text-center">
-         <div v-if="artists.length == 0" class=" text-warning text-white">
+         <div v-if="artists.length == 0" class=" text-warning text-white mt-5">
             Nessuna canzone disponibile <br>
             <span class="h3">Seleziona altri filtri per cercare altri brani</span>
          </div>
