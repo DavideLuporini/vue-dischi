@@ -1,7 +1,11 @@
 <template>
     <div class="container">
-      <div class="row g-3">
-         <div v-for="artist in artists" :key="artist.author" class="card text-center">
+      <div class="row g-3 text-center">
+         <div v-if="artists.length == 0" class=" text-warning text-white">
+            Nessuna canzone disponibile <br>
+            <span class="h3">Seleziona altri filtri per cercare altri brani</span>
+         </div>
+         <div v-else v-for="artist in artists" :key="artist.author" class="card text-center">
             <div class="card-cont">
                <img class="img-fluid" :src="artist.poster" :alt="artist.author" />
             </div>
@@ -23,6 +27,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+main{
+   min-height: calc(100vh - 70px);
+}
 .card {
    max-width: calc(100% / 5 - 30px);
    max-height: 380px;
@@ -42,7 +49,6 @@ export default {
    }
 
    .card-text{
-
        p {
           margin-bottom: 0;
        }
@@ -62,5 +68,8 @@ export default {
        }
    }
 }
+   .text-warning{
+      font-size: 55px;
+   }
 
 </style>

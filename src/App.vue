@@ -3,7 +3,9 @@
     
     <Header :generes-array="genre" :authors-array="authors" @genre-search="getGenre" @author-search="getAutor"/>
     <main class="d-flex align-items-center">
+      
          <MusicCard :artists="getSongs" :selected-genre="searchGenre" :selected-author="searchAuthor" />
+         
       </main>
     
   </div>
@@ -22,7 +24,7 @@ export default {
    },
    data() {
       return {
-         loader: true,
+        message: "nessun risultato disponibile",
          artists: [],
          genre: [],
          authors: [],
@@ -36,14 +38,10 @@ export default {
       },
       getSongs() {
          return this.artists.filter((song) => {
-            if (!this.searchGenre && !this.searchAuthor) {
+            if (!this.searchGenre && !this.searchAuthor ) {
                return true;
-            } else if (!this.searchGenre && this.searchAuthor) {
-               if (song.author === this.searchAuthor) {
-                  return true;
-               }
-            } else if (this.searchGenre && !this.searchAuthor) {
-               if (song.genre === this.searchGenre) {
+            } else if (!this.searchGenre && this.searchAuthor || this.searchGenre && !this.searchAuthor) {
+               if (song.author === this.searchAuthor || song.genre === this.searchGenre) {
                   return true;
                }
             } else {
@@ -56,10 +54,8 @@ export default {
    },
    methods: {
       getArtists() {
-         this.loader = true;
          axios.get("https://flynn.boolean.careers/exercises/api/array/music").then((res) => {
             this.artists = res.data.response;
-            this.loader = false;
          });
       },
       getArrayFromApi(arrayName, key) {
